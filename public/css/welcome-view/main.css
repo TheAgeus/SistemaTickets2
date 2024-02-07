@@ -1,0 +1,43 @@
+* {padding: 0;margin:0;}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    height: 100vh;
+    transition: 0.2s ease-out 50ms;
+}
+.toggle-color-mode-btn {
+    position: absolute;top: 0;right: 0;
+    margin:1rem;
+    color: rgb(0, 68, 255);
+    font-weight: bold;
+}
+.toggle-color-mode-btn:hover {cursor:pointer;}
+a {
+    text-decoration: none;
+    color: rgb(76, 76, 255);
+    font-size: 1.2rem;
+    font-weight: bold;
+
+}
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+.welcome-links {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 1rem;
+    gap: 0.5rem;
+}
+
+/* DARK THEME */
+.dark {
+    background-color: rgb(39, 45, 40);
+    color: white;
+}
+.dark > .welcome-links > a {color: rgb(153, 236, 255) !important;}
+.dark > .toggle-color-mode-btn {color: white;}
