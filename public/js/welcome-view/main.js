@@ -2,8 +2,6 @@ const theme = localStorage.getItem("theme")
 const toggleColorModeBtn = document.querySelector(".toggle-color-mode-btn")
 const bodyElement = document.querySelector("body")
 
-localStorage.setItem("theme", "white")
-
 if (theme == "white") {
     if(bodyElement.classList.contains("dark")) {
         bodyElement.classList.remove("dark")

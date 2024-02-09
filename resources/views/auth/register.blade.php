@@ -3,6 +3,11 @@
 
 <x-guest-layout>
     <x-authentication-card>
+
+        <div class="toggle-color-mode-btn">
+            Light Mode
+        </div>
+
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
@@ -30,6 +35,11 @@
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="rfc" value="{{ __('RFC') }}" />
+                <x-input id="rfc" class="block mt-1 w-full" type="text" name="rfc" :value="old('rfc')" required />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

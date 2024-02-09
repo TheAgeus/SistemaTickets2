@@ -3,12 +3,21 @@
 }
 .login-card {
     background-color: white;
+    transition: 0.2s ease-out 20ms;
+
 }
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
 }
-
+.toggle-color-mode-btn {
+    position: absolute;
+    top: 0;right: 0;
+    margin: 1rem;
+}
+.toggle-color-mode-btn:hover {
+    cursor: pointer;
+}
 
 /* Media Query */
 @media (width < 639px) {
@@ -45,5 +54,8 @@
     color: white
 }
 .dark > div > a {
+    color: white;
+}
+.dark > .login-card > .toggle-color-mode-btn {
     color: white;
 }

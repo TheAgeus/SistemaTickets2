@@ -1,7 +1,14 @@
 <link rel="stylesheet" href="{{asset("/css/login-view/main.css")}}">
 
+
+
 <x-guest-layout>
     <x-authentication-card>
+        
+        <div class="toggle-color-mode-btn">
+            Light Mode
+        </div>
+
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>

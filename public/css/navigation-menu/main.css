@@ -1,0 +1,22 @@
+.primary-navigation-menu {
+}
+.dark {
+    background-color: black;
+}
+
+.dark > div > div > div > .nav-links > a{
+    color: white;
+}
+
+
+/* Header */
+.dark-header {
+    background-color: black;
+    color: white;
+}
+.dark-header > div > h2{
+    color: white;
+}
+.dark-header > div {
+    border-top: 1px solid white;
+}

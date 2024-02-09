@@ -6,4 +6,6 @@
         </h2>
     </x-slot>
 
+    <x-empleados :empleados="$empleados" :empleadod="$empleadosDeshabilitados" />
+
 </x-app-layout>
