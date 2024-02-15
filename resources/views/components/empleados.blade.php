@@ -15,6 +15,7 @@
 
         .empleadosTable {
             box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+            
         }
         .ticketsTable {
             box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -23,16 +24,12 @@
             display: grid;
             grid-template-columns: 4fr 2fr 1fr;
             gap:  0.5rem;
-            overflow-y: scroll; 
-            padding-inline: 5%;
-        }
-        .ticketsTableRows {
-            display: grid;
-            grid-template-columns: 3fr 3fr 1fr;
-            gap:  0.5rem;
             padding-inline: 5%;
             overflow-y: scroll;
+            justify-items: start;
+            align-items: start;
         }
+        
         .header {
             font-weight: bold;
             text-align: left;
@@ -47,6 +44,7 @@
             margin: 0.8rem;
             width: 2rem;
         }
+
         .gapApertura {
             height: 5rem;
         }
@@ -64,8 +62,6 @@
         .notas > .nota > img {
             width: 1.5rem;
         }
-
-        .modal
 
         @media (width < 400px) {
             .data {
@@ -130,21 +126,35 @@
                 <div class="data">{{$empleado->rfc}}</div>
                 <div class="data">
                     <a href="/empleados/deshabilitar/{{$empleado->id}}"><img src="{{asset("/icons/delete.png")}}" alt=""></a>
-                    <a onclick="modal({{$empleado->id}})" href="#"><img src="{{asset("/icons/letter.png")}}" alt=""></a>
+                    <a class="assign-ticket-btn" href="#" onclick="modal(`{{$empleado->id}}`, `{{$empleado->name}}`)" ><img src="{{asset("/icons/letter.png")}}" alt=""></a>
                 </div>
             @endforeach 
+            
+            
             {{ $empleados->links() }}
+            
         </div>
     </div>
 
-    <div class="modal-asignar-ticket">
-
-    </div>
-
     <script>
-        function modal(id) {
-            console.log(id)
+        
+
+        assignTicketBtns = document.querySelectorAll(".assign-ticket-btn")
+        
+        assignTicketBtns.forEach(element => {
+            element.addEventListener("click", (e) => {
+                e.preventDefault()
+            })
+        });
+
+        function modal(id, name) {
+            modalTitleElement.innerHTML = "Asigna tickect a: " + name
+            if(modalElement.classList.contains("my-hidden")) {
+                modalElement.classList.add("show")
+                modalElement.classList.remove("my-hidden")
+            }
         }
+
     </script>
 
     <!-- GAP O ABERTURA PARA QUE LAS TABLAS NO SE VEAN TAN JUNTAS -->
@@ -194,7 +204,8 @@
                     <a href="/empleados/habilitar/{{$empleado_deshabilitado->id}}"><img src="{{asset("/icons/angel.png")}}" alt=""></a>
                 </div>
             @endforeach 
-            {{ $empleados->links() }}
+
+            {{$empleadod->links()}}
         </div>
     </div>
 

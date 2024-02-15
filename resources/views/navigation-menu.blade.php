@@ -14,18 +14,25 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex nav-links">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('empleados') }}" :active="request()->routeIs('empleados')">
-                        {{ __('Empleados') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Tickets') }}
-                    </x-nav-link>
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Clientes') }}
-                    </x-nav-link>
+                    @if(Auth()->user()->rol->rol == "ADMIN")
+                        <x-nav-link href="{{ route('empleados') }}" :active="request()->routeIs('empleados')">
+                            {{ __('Empleados') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('tickets') }}" :active="request()->routeIs('tickets')">
+                            {{ __('Tickets') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('clientes') }}" :active="request()->routeIs('clientes')">
+                            {{ __('Clientes') }}
+                        </x-nav-link>
+                    @elseif(Auth()->user()->rol->rol == "CLIENTE")
+                        <x-nav-link href="{{ route('tickets/clientes') }}" :active="request()->routeIs('tickets/clientes')">
+                            {{ __('Mis Tickets') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('tickets/add') }}" :active="request()->routeIs('tickets/add')">
+                            {{ __('Agregar Ticket') }}
+                        </x-nav-link>
+                    @elseif(Auth()->user()->rol->rol == "EMPLEADO")
+                    @endif
                 </div>
             </div>
 

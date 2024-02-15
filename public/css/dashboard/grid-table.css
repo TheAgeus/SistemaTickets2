@@ -1,0 +1,21 @@
+@media (width > 400px) {
+    .grid-table{
+        padding: 5%;
+    }
+}
+.header-cell {
+    font-weight: bold;
+}
+.grid-table {
+    display: grid;
+    overflow-x: scroll;
+}
+.clientes-table {
+    gap: 1rem;
+    grid-template-columns: 2fr 2fr 1fr;
+}
+
+.tickets-table {
+    gap: 1rem;
+    grid-template-columns: 0.2fr 2fr 5fr 0.5fr 1fr;
+}
