@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Ticket;
+use App\Models\ClienteTicket;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -63,6 +65,36 @@ class UserController extends Controller
             return redirect()->back()->with('success-deshabilitado', 'Empleado ' . $user_name . ' habilitado con éxito');  
         }
         else 
+        {
+            return view('Forbbiden');
+        }
+    }
+
+    public function empleado_asignar_tickets(Request $request) 
+    {
+        if(Auth()->user()->rol->rol == "ADMIN")
+        {
+            $empleado_id = $request->get('empleado_id');
+            $request = $request->except('_token', 'empleado_id'); // Aquí están los id de los tickets que se quieren asignar al empleado
+            $data = [];
+            $ticket_id_cambiar_a_en_atención = [];
+
+            foreach($request as $tikcet_id) {
+                array_push($ticket_id_cambiar_a_en_atención, $tikcet_id);
+            }
+
+            DB::table('ticket_user')->whereIn('ticket_id', $ticket_id_cambiar_a_en_atención)->update([
+                'empleado_id' => $empleado_id
+            ]);
+            DB::table('tickets')->whereIn('id', $ticket_id_cambiar_a_en_atención)->update([
+                'estado' => 'EN REVISION'
+            ]);
+
+
+            return redirect()->back()->with('success', 'Tickets Asignados');  
+
+        }
+        else
         {
             return view('Forbbiden');
         }

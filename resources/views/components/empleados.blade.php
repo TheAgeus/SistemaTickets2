@@ -137,8 +137,6 @@
     </div>
 
     <script>
-        
-
         assignTicketBtns = document.querySelectorAll(".assign-ticket-btn")
         
         assignTicketBtns.forEach(element => {
@@ -149,12 +147,12 @@
 
         function modal(id, name) {
             modalTitleElement.innerHTML = "Asigna tickect a: " + name
+            document.querySelector(".empleadoId").value = id
             if(modalElement.classList.contains("my-hidden")) {
                 modalElement.classList.add("show")
                 modalElement.classList.remove("my-hidden")
             }
         }
-
     </script>
 
     <!-- GAP O ABERTURA PARA QUE LAS TABLAS NO SE VEAN TAN JUNTAS -->

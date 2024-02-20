@@ -19,3 +19,13 @@
     gap: 1rem;
     grid-template-columns: 0.2fr 2fr 5fr 0.5fr 1fr;
 }
+.my-tickets-table { /* Para la tabla de tickets de un cliente */
+    gap: 1rem;
+    grid-template-columns: 2fr 5fr 1fr 1fr 1fr;
+}
+.ticket_link {
+    color: blue;
+}
+.ticket_link:hover {
+    color:rgb(0, 128, 255);
+}

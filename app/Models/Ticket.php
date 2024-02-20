@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $fillable = [
         'titulo',
         'descripcion',

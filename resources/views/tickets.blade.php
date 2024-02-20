@@ -13,7 +13,9 @@
                 {{$ticket->id}}
             </div>
             <div class="table-cell">
-                {{$ticket->titulo}}
+                <a class="ticket_link" href='/tickets/show/{{ $ticket->id }}'>
+                    {{ $ticket->titulo }}
+                </a>
             </div>
             <div class="table-cell">
                 {{$ticket->descripcion}}

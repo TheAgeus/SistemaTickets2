@@ -32,6 +32,9 @@
                             {{ __('Agregar Ticket') }}
                         </x-nav-link>
                     @elseif(Auth()->user()->rol->rol == "EMPLEADO")
+                        <x-nav-link href="{{ route('empleados/tickets') }}" :active="request()->routeIs('empleado/tickets')">
+                            {{ __('Mis Tickets') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>

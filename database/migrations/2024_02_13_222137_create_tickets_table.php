@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("titulo");
             $table->string("descripcion");
             $table->string("prioridad");
-            $table->string("estado")->default("pendiente");
+            $table->string("estado")->default("PENDIENTE");
             $table->timestamp('tiempo_registro')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('tiempo_inicio')->nullable();
             $table->timestamp('tiempo_final')->nullable();

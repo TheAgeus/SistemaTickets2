@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket_empleado', function (Blueprint $table) {
-            $table->foreignId('user_id')->index();
-            $table->foreignId('ticket_id')->index();
+        Schema::create('ticket_user', function (Blueprint $table) {
+            $table->integer('cliente_id')->unsigned();
+            $table->integer('empleado_id')->unsigned()->nullable();
+            $table->integer('ticket_id')->unsigned();
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket_empleado');
+        Schema::dropIfExists('ticket_user');
     }
 };

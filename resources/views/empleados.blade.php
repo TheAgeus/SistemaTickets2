@@ -65,39 +65,45 @@
         </style>
 
         <div class="modal my-hidden">
-            <div class="close-button">
-                <img src="{{asset("/icons/x.png")}}" alt="">
-            </div>
-            <div class="title">
-                Asignar ticket a: 
-            </div>
-            <div class="ticketsTableRows">
-                <div class="header">Add</div>
-                <div class="header">No.</div>
-                <div class="header">Prioridad</div>
-                <div class="header">Título</div>
-                <div class="header">Descripcion</div>
+            <form action="{{route("empleados/asignar/ticket")}}" method="POST">
+                @csrf
 
-                @foreach($tickets as $ticket)
-                    <div class="input">
-                        <input type="checkbox" id="cbox1" value="{{$ticket->id}}" />
-                    </div>
-                    <div class="data">
-                        {{$ticket->id}} 
-                    </div>
-                    <div class="data">
-                        {{$ticket->prioridad}} 
-                    </div>
-                    <div class="data">
-                        {{$ticket->titulo}} 
-                    </div>
-                    <div class="data">
-                        {{$ticket->descripcion}} 
-                    </div>
-                @endforeach
-            </div>
-            
-            <div class="asignar-tickets-button"></div>
+                <input class="empleadoId" name="empleado_id" type="hidden" value="">
+
+                <div class="close-button">
+                    <img src="{{asset("/icons/x.png")}}" alt="">
+                </div>
+                <div class="title">
+                    Asignar ticket a: 
+                </div>
+                <div class="ticketsTableRows">
+                    <div class="header">Add</div>
+                    <div class="header">No.</div>
+                    <div class="header">Prioridad</div>
+                    <div class="header">Título</div>
+                    <div class="header">Descripcion</div>
+    
+                    @foreach($tickets as $ticket)
+                        <div class="input">
+                            <input name="{{"check" . $ticket->id}}" class="checkbox-input-asignar" type="checkbox" value="{{$ticket->id}}" />
+                        </div>
+                        <div class="data">
+                            {{$ticket->id}} 
+                        </div>
+                        <div class="data">
+                            {{$ticket->prioridad}} 
+                        </div>
+                        <div class="data">
+                            {{$ticket->titulo}} 
+                        </div>
+                        <div class="data">
+                            {{$ticket->descripcion}} 
+                        </div>
+                    @endforeach
+                </div>
+                
+                <button type="submit" class="asignar-tickets-button">Asignar</div>
+            </form>
         </div>
 
         <script>
@@ -115,7 +121,6 @@
                     modalElement.classList.remove("my-hidden")
                 }
             })
-
         </script>
 
     <!-- MODAL END -->
