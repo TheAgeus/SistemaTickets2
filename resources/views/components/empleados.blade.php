@@ -40,7 +40,10 @@
             align-items: center;
             word-wrap:break-word;
         }
-        .data > a {
+        .link {
+            color: blue;
+        }
+        .icon {
             margin: 0.8rem;
             width: 2rem;
         }
@@ -122,11 +125,15 @@
             <div class="header">ACCIONES</div>
     
             @foreach($empleados as $empleado)
-                <div class="data">{{$empleado->name}}</div>
+                <div class="data">
+                    <a class="link" href='empleados/show/{{ $empleado->id }}'>
+                        {{$empleado->name}}
+                    </a>
+                </div>
                 <div class="data">{{$empleado->rfc}}</div>
                 <div class="data">
-                    <a href="/empleados/deshabilitar/{{$empleado->id}}"><img src="{{asset("/icons/delete.png")}}" alt=""></a>
-                    <a class="assign-ticket-btn" href="#" onclick="modal(`{{$empleado->id}}`, `{{$empleado->name}}`)" ><img src="{{asset("/icons/letter.png")}}" alt=""></a>
+                    <a class="icon" href="/empleados/deshabilitar/{{$empleado->id}}"><img src="{{asset("/icons/delete.png")}}" alt=""></a>
+                    <a class="assign-ticket-btn icon" href="#" onclick="modal(`{{$empleado->id}}`, `{{$empleado->name}}`)" ><img src="{{asset("/icons/letter.png")}}" alt=""></a>
                 </div>
             @endforeach 
             

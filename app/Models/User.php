@@ -13,6 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+use Illuminate\Support\Facades\DB;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
@@ -67,6 +69,20 @@ class User extends Authenticatable implements MustVerifyEmail
     function rol(): HasOne
     {
         return $this->hasOne(Tipo::class);
+    }
+
+    function tickets($tipo, $clienteId) // depende de la string en el argumento, será el conteo de tickets, ya sea como cliente o como un empleado 
+    {
+
+        if ($tipo == "EMPLEADO")
+        {
+            return DB::table('ticket_user')->where('empleado_id', $clienteId)->count();
+        }
+        if($tipo == "CLIENTE")
+        {
+            return DB::table('ticket_user')->where('cliente_id', $clienteId)->count();
+        }
+
     }
 
 }

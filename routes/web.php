@@ -36,7 +36,9 @@ Route::middleware([
     Route::get('/clientes', [App\Http\Controllers\UserController::class, 'clientes'])->name('clientes');
     Route::get('/tickets', [App\Http\Controllers\TicketController::class, 'tickets'])->name('tickets');
     Route::get('/tickets/show/{id}', [App\Http\Controllers\TicketController::class, 'showTicket'])->name('showTicket');
-    Route::get('seleccionar_tickets', [App\Http\Controllers\TicketController::class, 'seleccionar_tickets'])->name('seleccionar_tickets');
+    Route::get('/seleccionar_tickets', [App\Http\Controllers\TicketController::class, 'seleccionar_tickets'])->name('seleccionar_tickets');
+    Route::get('/clientes/show/{id}', [App\Http\Controllers\UserController::class, 'showCliente'])->name('show_cliente');
+    Route::get('/empleados/show/{id}', [App\Http\Controllers\UserController::class, 'showCliente'])->name('show_cliente');
 
     Route::get('/tickets/clientes', [App\Http\Controllers\TicketController::class, 'ticketsClientes'])->name('tickets/clientes');
     Route::get('/tickets/add', [App\Http\Controllers\TicketController::class, 'ticketsClientesAddTicket'])->name('tickets/add');
@@ -48,5 +50,7 @@ Route::middleware([
     Route::post('empleados/asignar/ticket', [App\Http\Controllers\UserController::class, 'empleado_asignar_tickets'])->name('empleados/asignar/ticket');
     Route::get('/tickets/{id}/iniciar', [App\Http\Controllers\TicketController::class, 'iniciarTicket'])->name('iniciarTicket');
     Route::get('/tickets/{id}/terminar', [App\Http\Controllers\TicketController::class, 'terminarTicket'])->name('terminarTicket');
+    Route::post('/ticket/asignar/empleados', [App\Http\Controllers\TicketController::class, 'ticketAsignarEmpleados'])->name('ticket/asignar/empleados');
+    
     Route::post('/tickets/calificar', [App\Http\Controllers\TicketController::class, 'calificarTicket'])->name('calificarTicket');
 });

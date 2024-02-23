@@ -1,0 +1,76 @@
+Requerimientos del sistema:
+
+Simbología:
+Character	Significado
+    -		Ya está implementado
+    *		Se quiere implementar
+
+
+- Existen 3 administradores que pueden:
+	- Dar de alta a empleados
+	- Deshabilitar empleados
+	- Asignar Tickets a empleados
+	* Se puede asignar empleados a los tickets
+
+- Existe una parte en la que los clientes se pueden registrar
+- Para las vistas de los empleados:
+	- Pueden ver los tickets asignados a ellos
+	- Pueden iniciar los tickets
+	- Pueden terminar los tickets
+
+- Para las vistas de los clientes:
+	- Pueden calificar un ticket
+	- Pueden ver todos sus tickets
+	- Pueden filtrar los tickets por su estado
+
+- Se pueden visualizar los tickets individualmente
+
+VISTAS (rutas):
+- /empleados:
+	(Para admins)
+	- Aquí se puede ver la tabla de los empleados, tanto si está habilitado como si no
+	- Aquí se puede asignar tickets a los empleados
+	- Aguñi se puede deshabilitar o habilitar a los empleados
+
+- /tickets:
+	(Para admins)
+	- Aquí se puede ver todos los tickets
+	- Se puede ir a ver la informacion de los tickets
+	* Se quiere que se pueda asignar varios empleados desde esta vista a un ticket
+
+- /clientes:
+	(Para admins)
+	- Se pueden ver todos los clientes
+
+- /dashboard:
+	* Se pretende que aquí estén las instrucciones para cada usuario
+
+- /empleados/tickets:
+- /empleados/seleccionar_tickets:
+	(Para empleados)
+	- /empleados/tickets es solo la ruta para mostrar el form, una vez filtrado, cambia a la se
+	  segunda ruta que es /empleados/seleccionar_tickets
+	- Se pueden ver los tickets que se tienen asignados al empleado logueado
+	- Se pueden filtrar los tickets por el estado
+
+- /tickets/clientes:
+	(Para clientes)
+	- Aquí se pueden ver todos los tickes creados por el cliente logueado
+
+- /tickets/add:
+	(Para clientes)
+	- Aquí los clientes pueden agregar un ticket
+	* El formulario no tiene estilos todavía, ponerle estilos
+
+
+TO DO:
+* Posibilidad de asignar varios empleados a un mismo ticket
+- Agregar funcionalidad para observar el numero de tickets de un cliente
+- Agregar funcionalidad para observar el numero de tickets de un empleado
+- Tener la posibilidad de ver la informacion completa de un empleado, solo para admin
+- Tener la posibilidad de ver toda la información de un cliente, solo para admin
+- Cambiar filtro de tickets en la vista de seleccionar_tickets de EN PROCESO a EN REVISION
+- Corregir la ruta de ver ticket de /seleccionar_tickets ME FALTA PONER EL /SHOW antes del numero
+- En la vista de ver el ticket:
+	- Que se pueda navegar al cliente 
+	- Que se pueda navegar al empleado 

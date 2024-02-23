@@ -58,6 +58,19 @@
             display: flex;
             flex-direction: column;
         }
+        .link {
+            color: blue;
+        }
+        .assing_employees_button_open_modal {
+            background-color: rgb(0, 0, 193);
+            color: white;
+            width: fit-content;
+            padding: 0.5rem;
+            font-weight: bold;
+        }
+        .assing_employees_button_open_modal:hover{
+            cursor: pointer;
+        }
     </style>
 
     <div class="card">
@@ -73,8 +86,15 @@
             <p><strong>End Time:</strong> {{ $ticketData['tiempo_final'] }}</p>
             <p><strong>Service Feedback:</strong> {{ $ticketData['como_fue_servicio'] }}</p>
             <p><strong>Observations:</strong> {{ $ticketData['observaciones'] }}</p>
-            <p><strong>Client:</strong> {{ $ticketData['cliente_name'] }} (ID: {{ $ticketData['cliente_id'] }})</p>
-            <p><strong>Employee:</strong> {{ $ticketData['empleado_name'] }} (ID: {{ $ticketData['empleado_id'] }})</p>
+            <p><strong>Client:</strong>  
+                <a class="link" href='/empleados/show/{{ $ticketData['cliente_id'] }}'>
+                    {{ $ticketData['cliente_name'] }}
+                </a>
+            </p>
+            <p><strong>Employee:</strong> 
+                <a class="link" href='/empleados/show/{{ $ticketData['empleado_id'] }}'>
+                    {{ $ticketData['empleado_name'] }}
+                </a>
             @if(Auth()->user()->rol->rol == "EMPLEADO")  
                 @if($ticketData['estado'] == "PENDIENTE")
                     <a class="ticket_action_btn" href="{{$ticketData['id']}}/iniciar">Iniciar Ticket</a>
@@ -105,9 +125,182 @@
                     </form>
                 @endif
             @endif
+
+            <div class="assing_employees_button_open_modal">
+                Asignar empleados
+            </div>
+            
+            <!-- MODAL START -->
+
+            <style>
+                .modal{
+                    position: fixed;
+                    height: calc(100vh - 2rem);
+                    background-color: white;
+                    width: calc(100vw - 2rem);
+                    box-shadow: 1px 1px 5px 1px;
+                    top: 0;
+                    overflow-y: auto;
+                    bottom: 0;
+                    
+                    padding: 1rem;
+                    border-radius: 20px;
+                }
+                @media (width < 400px){
+                    .modal {
+                        margin: 0;
+                        padding: 1rem;
+                        width: 100%;
+                    }
+                }
+                .show {
+                    display: hidden;
+                }
+                .my-hidden {
+                    display: none;
+                }
+                .close-button {
+                    width: 2rem;
+                    border-radius: 100%;
+                    box-shadow: 1px 1px 5px 1px;
+                    padding: 10px;
+                    position: absolute;
+                    right: 1rem;
+                    top: 1rem;
+                }
+                .close-button:hover {
+                    cursor: pointer;
+                }
+
+                .ticketsTableRows {
+                    display: grid;
+                    grid-template-columns: 0.5fr 0.5fr 3fr 1fr 0.5fr;
+                    gap:  0.5rem;
+                    overflow-y: scroll;
+                    justify-items: start;
+                    align-items: center;
+                }
+                .title {
+                    font-weight: bold;
+                    font-size: 1.8rem;
+                    margin-block: 1rem;
+                }
+                .asignar-tickets-button {
+                    width: fit-content;
+                    background-color: blue;
+                    color: white;
+                    font-weight: bold;
+                    margin-top: 1rem;
+                    padding: 0.5rem;
+                }
+
+            </style>
+
+            <div class="modal my-hidden">
+                <form action="{{route("ticket/asignar/empleados")}}" method="POST">
+                    @csrf
+                    
+                    <input class="ticketId" name="ticket_id" type="hidden" value="">
+
+                    <div class="close-button">
+                        <img src="{{asset("/icons/x.png")}}" alt="">
+                    </div>
+                    <div class="title">
+                        Asignar empleados a: 
+                    </div>
+                    <div class="ticketsTableRows">
+                        <div class="header">Add</div>
+                        <div class="header">ID</div>
+                        <div class="header">Nombre</div>
+                        <div class="header">RFC</div>
+                        <div class="header">No. Tickets</div>
+        
+                        @foreach($empleados as $emp)
+                            <div class="input">
+                                <input name="{{"check" . $emp->id}}" class="checkbox-input-asignar" type="checkbox" value="{{$emp->id}}" />
+                            </div>
+                            <div class="data">
+                                {{$emp->id}} 
+                            </div>
+                            <div class="data">
+                                {{$emp->name}} 
+                            </div>
+                            <div class="data">
+                                {{$emp->rfc}} 
+                            </div>
+                            <div class="data">
+                                {{$emp->tickets("EMPLEADO", $emp->id)}} 
+                            </div>
+                        @endforeach
+                    </div>
+                    
+                    <button type="submit" class="asignar-tickets-button">Asignar</div>
+                </form>
+            </div>
+
+            <script>
+                const asignarEmpleadosOpenModal = document.querySelector(".assing_employees_button_open_modal");
+                const modalElement = document.querySelector(".modal");
+                const ticket_id = document.querySelector(".title")
+                asignarEmpleadosOpenModal.addEventListener("click", (e) => {
+                    document.querySelector(".ticketId").value = {{$ticketData['id']}} 
+                    ticket_id.innerHTML = "TABLA DE EMPLEADOS"
+                    modalElement.classList.add("show");
+                    modalElement.classList.remove("my-hidden");
+                })
+                const closeBtn = modalElement.querySelector(".close-button") 
+            
+                closeBtn.addEventListener("click", (e) => {
+                if(modalElement.classList.contains("show")) {
+                    modalElement.classList.add("my-hidden")
+                    modalElement.classList.remove("show")
+                }
+                else if(modalElement.classList.contains("my-hidden")) {
+                    modalElement.classList.add("show")
+                    modalElement.classList.remove("my-hidden")
+                }
+            })
+            </script>
+
+        <!-- MODAL END -->
+
+            
+
         </div>
 
 
+
     </div>
+    @if (\Session::has('success'))
+        <style>
+            .success {
+                color: #155724; /* Dark green color */
+                background-color: #d4edda; /* Light green background color */
+                border: 1px solid #c3e6cb; /* Border color */
+                padding: 0.5em 1em; /* Padding */
+                border-radius: 0.25em; /* Rounded corners */
+                display: inline-block; /* Display as inline-block */
+                margin-inline: 1rem;
+            }
+            .success:hover {
+                cursor: pointer;
+            }
+        </style>  
+        <div class="success">
+            {!! \Session::get('success') !!} 
+        </div>  
+        <script>
+            const successLabel = document.querySelector(".success");
+            successLabel.addEventListener("click", (e) => {
+                successLabel.remove();
+            });
+        </script>
+    @endif
+          
+
+        
+
+
+        
 
 </x-app-layout>

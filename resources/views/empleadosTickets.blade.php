@@ -73,7 +73,7 @@
                 <select name="estado_tickets" id="estado_tickets">
                     <option value=""></option>
                     <option value="PENDIENTE">PENDIENTE</option>
-                    <option value="EN PROCESO">EN PROCESO</option>
+                    <option value="EN REVISION">EN REVISION</option>
                     <option value="TERMINADO">TERMINADO</option>
                     <option value="CALIFICADO">CALIFICADO</option>
                     <option value="TODOS">TODOS</option>
@@ -103,7 +103,7 @@
                     <tr>
                         <td>{{ $ticket['ticket_id'] }}</td>
                         <td>
-                            <a class="ticket_link" href='tickets/{{ $ticket['ticket_id'] }}'>
+                            <a class="ticket_link" href='tickets/show/{{ $ticket['ticket_id'] }}'>
                                 {{ $ticket['titulo'] }}
                             </a>
                         </td>

@@ -61,6 +61,14 @@
                 font-weight: bold;
                 font-size: 1.8rem;
             }
+            .asignar-tickets-button {
+                width: fit-content;
+                background-color: blue;
+                color: white;
+                font-weight: bold;
+                margin-top: 1rem;
+                padding: 0.5rem;
+            }
 
         </style>
 

@@ -2,6 +2,19 @@
 
     <link rel="stylesheet" href="{{asset("/css/dashboard/grid-table.css")}}">
 
+    <style>
+        .title {
+            padding-inline: 5%;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 5%;
+        }
+    </style>
+
+    <div class="title">
+        TABLA DE TICKETS
+    </div>
+
     <div class="grid-table tickets-table">
         <div class="header-cell">Id</div>
         <div class="header-cell">Título</div>

@@ -120,6 +120,20 @@ class UserController extends Controller
         {
             return view('Forbbiden');
         }
-        
+    }
+    public function showCliente($id)
+    {
+        if(Auth()->user()->rol->rol == "ADMIN")
+        {
+            $cliente = User::find($id);
+            return view('showCliente', [
+                'cliente' => $cliente
+            ]);
+
+        }
+        else 
+        {
+            return view('Forbbiden');
+        }
     }
 }

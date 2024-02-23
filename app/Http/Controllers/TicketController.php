@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Models\User;
 use App\Models\ClienteTicket;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -140,8 +141,23 @@ class TicketController extends Controller
         ->where('ticket_user.ticket_id', $id)
         ->get();
 
+        /*$empleados = User::join('tipos', 'users.id', '=', 'tipos.user_id')
+                  ->where('tipos.rol', "EMPLEADO")
+                  ->get();*/
+
+        $empleados = User::leftJoin('ticket_user', function($join) use ($id) {
+                    $join->on('users.id', '=', 'ticket_user.empleado_id')
+                         ->where('ticket_user.ticket_id', '=', $id);
+                })
+                ->whereNull('ticket_user.ticket_id')
+                ->get();
+
+        $empleados_asignados = User::join('ticket_user', 'ticket_user.empleado_id', =)
+
         return view('showTicket', [
-            'ticketData' => $ticketData->toArray()[0]
+            'ticketData' => $ticketData->toArray()[0],
+            'empleados' => $empleados,
+            'empleados_asignados' => $empleados_asignados
         ]);
     }
 
@@ -216,5 +232,44 @@ class TicketController extends Controller
                 }
             }
         }
+    }
+    public function ticketAsignarEmpleados(Request $request) 
+    {
+        if(Auth()->user()->rol->rol == "ADMIN")
+        {
+            $ticket_id = $request->get('ticket_id'); // ticket id
+            $request = $request->except('_token', 'ticket_id'); // ids de los empleados
+            $cliente_id = ClienteTicket::select('cliente_id')->where('ticket_id', $ticket_id)->first()['cliente_id']; // get cliente_id
+            $estado_ticket = DB::table('tickets')->select('estado')->where('id', $ticket_id)->get(); // get estado
+
+            $empleados_ids = [];
+
+    
+            foreach($request as $empleado_id) {
+                array_push($empleados_ids, $empleado_id);
+                $assign = new ClienteTicket();
+                $assign->cliente_id = $cliente_id;
+                $assign->empleado_id = $empleado_id;
+                $assign->ticket_id = $ticket_id;
+                $assign->save();
+            }
+
+            if($estado_ticket == "PENDIENTE")
+            {
+                DB::table('tickets')->where('id', $ticket_id)->update([
+                    'estado' => 'EN REVISION'
+                ]);
+            }
+
+            $empleados_names = User::whereIn('id', $empleados_ids)->pluck('name');
+
+            return redirect()->back()->with('success', 'Empleados ' . implode(", ", $empleados_names->toArray()) . ' asignados al ticket');  
+
+        }
+        else 
+        {
+            return view('Forbbiden');
+        }
+        
     }
 }

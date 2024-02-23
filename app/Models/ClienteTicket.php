@@ -10,7 +10,7 @@ class ClienteTicket extends Model
     use HasFactory;
 
     protected $table = 'ticket_user';
-
+    public $timestamps = false;
     protected $fillable = [
         'ticket_id',
         'cliente_id',
