@@ -16,10 +16,47 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         /* AGREAGR USUARIOS EMPLEADOS Y ADMIN */
+        
+        DB::table('users')->insert([
+            'name' => 'Ageus Admin',
+            'email' => 'ageus94@gmail.com',
+            'password' => Hash::make('password'),
+            'email_verified_at' => '2024-02-08 19:25:52',
+            'rfc' => Str::random(10),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Ageus Empleado',
+            'email' => 'ageus699@gmail.com',
+            'password' => Hash::make('password'),
+            'email_verified_at' => '2024-02-08 19:25:52',
+            'rfc' => Str::random(10),
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Armando Cliente',
+            'email' => 'newlifenv@hotmail.com',
+            'password' => Hash::make('password'),
+            'email_verified_at' => '2024-02-08 19:25:52',
+            'rfc' => Str::random(10),
+        ]);
+        DB::table('tipos')->insert([
+            'user_id' => 1,
+            'rol' => 'ADMIN',
+        ]);
+        DB::table('tipos')->insert([
+            'user_id' => 2,
+            'rol' => 'EMPLEADO',
+        ]);
+        DB::table('tipos')->insert([
+            'user_id' => 3,
+            'rol' => 'CLIENTE',
+        ]);
+
+        /*
         for($i=1; $i<=10; $i++)
         {
+
             DB::table('users')->insert([
-                'name' => Str::random(7) . ' ' . Str::random(7) . ' '. Str::random(7) . ' ' .Str::random(7),
+                'name' => 'Usuario Userino ' . $i,
                 'email' => Str::random(10).'@example.com',
                 'password' => Hash::make('password'),
                 'email_verified_at' => '2024-02-08 19:25:52',
@@ -48,8 +85,9 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
-
+        */
         /* AGREGAR TICKETS DE PRUEBA PENDIENTES */
+        /*
         for($i=1; $i<=10; $i++) 
         {
             DB::table('tickets')->insert([
@@ -63,5 +101,6 @@ class DatabaseSeeder extends Seeder
                 'ticket_id' => $i
             ]);
         }
+        */
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
 
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->string("titulo");
+            $table->string("titulo")->unique();
             $table->string("descripcion");
             $table->string("prioridad");
             $table->string("estado")->default("PENDIENTE");
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamp('tiempo_final')->nullable();
             $table->string('como_fue_servicio')->nullable();
             $table->string('observaciones')->nullable();
+            $table->integer('cliente_id')->unsigned();
         });
     }
 

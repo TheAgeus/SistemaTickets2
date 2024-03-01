@@ -101,15 +101,15 @@
             <tbody>
                 @foreach($tickets as $ticket)
                     <tr>
-                        <td>{{ $ticket['ticket_id'] }}</td>
+                        <td>{{ $ticket->ticket_id }}</td>
                         <td>
-                            <a class="ticket_link" href='tickets/show/{{ $ticket['ticket_id'] }}'>
-                                {{ $ticket['titulo'] }}
+                            <a class="ticket_link" href='tickets/show/{{ $ticket->ticket_id }}'>
+                                {{ $ticket->titulo }}
                             </a>
                         </td>
-                        <td>{{ $ticket['descripcion'] }}</td>
-                        <td>{{ $ticket['prioridad'] }}</td>
-                        <td>{{ $ticket['estado'] }}</td>
+                        <td>{{ $ticket->descripcion }}</td>
+                        <td>{{ $ticket->prioridad }}</td>
+                        <td>{{ $ticket->estado }}</td>
                     </tr>
                 @endforeach
             </tbody>

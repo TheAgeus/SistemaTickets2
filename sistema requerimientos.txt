@@ -10,7 +10,7 @@ Character	Significado
 	- Dar de alta a empleados
 	- Deshabilitar empleados
 	- Asignar Tickets a empleados
-	* Se puede asignar empleados a los tickets
+	- Se puede asignar empleados a los tickets
 
 - Existe una parte en la que los clientes se pueden registrar
 - Para las vistas de los empleados:
@@ -36,14 +36,14 @@ VISTAS (rutas):
 	(Para admins)
 	- Aquí se puede ver todos los tickets
 	- Se puede ir a ver la informacion de los tickets
-	* Se quiere que se pueda asignar varios empleados desde esta vista a un ticket
+	- Se quiere que se pueda asignar varios empleados desde esta vista a un ticket
 
 - /clientes:
 	(Para admins)
 	- Se pueden ver todos los clientes
 
 - /dashboard:
-	* Se pretende que aquí estén las instrucciones para cada usuario
+	- Se pretende que aquí estén las instrucciones para cada usuario
 
 - /empleados/tickets:
 - /empleados/seleccionar_tickets:
@@ -60,11 +60,11 @@ VISTAS (rutas):
 - /tickets/add:
 	(Para clientes)
 	- Aquí los clientes pueden agregar un ticket
-	* El formulario no tiene estilos todavía, ponerle estilos
+	- El formulario no tiene estilos todavía, ponerle estilos
 
 
 TO DO:
-* Posibilidad de asignar varios empleados a un mismo ticket
+- Posibilidad de asignar varios empleados a un mismo ticket
 - Agregar funcionalidad para observar el numero de tickets de un cliente
 - Agregar funcionalidad para observar el numero de tickets de un empleado
 - Tener la posibilidad de ver la informacion completa de un empleado, solo para admin
@@ -74,3 +74,11 @@ TO DO:
 - En la vista de ver el ticket:
 	- Que se pueda navegar al cliente 
 	- Que se pueda navegar al empleado 
+
+
+- Se envía un correo electrónico a todos los correos que sean de admin cuando se crea un ticket. (TICKET REGISTRADO!!!)
+- Se envía un correo electrónico a los correos de los empleados que se les asigna un ticket y al cliente dueño del ticket, que su ticket
+  ya está asignado (cuando un admin asigna a un ticket varios empleados)
+* lo de arriba pero cuando un admin asigna varios tickets a un solo empleado
+* Se envia un correo a los clientes, cuando un ticket suyo ya está terminado, para que lo califique 
+* Se envia un correo a los empleados asignados a un ticket cuando este es calificado

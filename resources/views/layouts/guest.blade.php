@@ -13,9 +13,12 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        <script src="/build/assets/app-gkggixx.js"></script>
+        
         <!-- Styles -->
         @livewireStyles
+        <link rel="stylesheet" href="/build/assets/app-yaDSh5pJ.css">
+    </head>
     </head>
     <body>
         <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">

@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket_user', function (Blueprint $table) {
-            $table->integer('cliente_id')->unsigned();
-            $table->integer('empleado_id')->unsigned()->nullable();
+        Schema::create('ticket_empleado', function (Blueprint $table) {
+            $table->integer('empleado_id')->unsigned();
             $table->integer('ticket_id')->unsigned();
         });
     }
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket_user');
+        Schema::dropIfExists('ticket_empleado');
     }
 };

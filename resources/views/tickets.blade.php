@@ -8,7 +8,10 @@
             font-size: 2rem;
             font-weight: bold;
             margin-top: 5%;
+            margin: 1rem;
         }
+
+        
     </style>
 
     <div class="title">

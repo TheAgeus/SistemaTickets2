@@ -18,7 +18,7 @@
 
         @foreach($tickets as $ticket)
             <div> 
-                <a class="ticket_link" href='/tickets/show/{{ $ticket->ticket_id }}'>
+                <a class="ticket_link" href='/tickets/show/{{ $ticket->id }}'>
                     {{ $ticket->titulo }}
                 </a>
             </div>

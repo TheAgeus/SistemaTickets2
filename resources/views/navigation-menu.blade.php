@@ -16,24 +16,30 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex nav-links">
                     @if(Auth()->user()->rol->rol == "ADMIN")
                         <x-nav-link href="{{ route('empleados') }}" :active="request()->routeIs('empleados')">
-                            {{ __('Empleados') }}
+                            {{ __('EMPLEADOS') }}
                         </x-nav-link>
                         <x-nav-link href="{{ route('tickets') }}" :active="request()->routeIs('tickets')">
-                            {{ __('Tickets') }}
+                            {{ __('TICKETS') }}
                         </x-nav-link>
                         <x-nav-link href="{{ route('clientes') }}" :active="request()->routeIs('clientes')">
-                            {{ __('Clientes') }}
+                            {{ __('CLIENTES') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('agregar_empleado_vista') }}" :active="request()->routeIs('agregar_empleado_vista')">
+                            {{ __('AGREGAR EMPLEADO') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('show_descargar_excel') }}" :active="request()->routeIs('show_descargar_excel')">
+                            {{ __('DESCARGAR EXCEL') }}
                         </x-nav-link>
                     @elseif(Auth()->user()->rol->rol == "CLIENTE")
                         <x-nav-link href="{{ route('tickets/clientes') }}" :active="request()->routeIs('tickets/clientes')">
-                            {{ __('Mis Tickets') }}
+                            {{ __('MIS TICKETS') }}
                         </x-nav-link>
                         <x-nav-link href="{{ route('tickets/add') }}" :active="request()->routeIs('tickets/add')">
-                            {{ __('Agregar Ticket') }}
+                            {{ __('AGREGAR TICKET') }}
                         </x-nav-link>
                     @elseif(Auth()->user()->rol->rol == "EMPLEADO")
                         <x-nav-link href="{{ route('empleados/tickets') }}" :active="request()->routeIs('empleado/tickets')">
-                            {{ __('Mis Tickets') }}
+                            {{ __('MIS TICKETS') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -161,17 +167,36 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('DASHBOARD') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Empleados') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Tickets') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Clientes') }}
-            </x-responsive-nav-link>
+            @if(Auth()->user()->rol->rol == "ADMIN")
+                <x-responsive-nav-link href="{{ route('empleados') }}" :active="request()->routeIs('empleados')">
+                    {{ __('EMPLEADOS') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('tickets') }}" :active="request()->routeIs('tickets')">
+                    {{ __('TICKETS') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('clientes') }}" :active="request()->routeIs('clientes')">
+                    {{ __('CLIENTES') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('agregar_empleado_vista') }}" :active="request()->routeIs('agregar_empleado_vista')">
+                    {{ __('AGREGAR EMPLEADO') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('show_descargar_excel') }}" :active="request()->routeIs('show_descargar_excel')">
+                    {{ __('DESCARGAR EXCEL') }}
+                </x-responsive-nav-link>
+            @elseif(Auth()->user()->rol->rol == "CLIENTE")
+                <x-responsive-nav-link href="{{ route('tickets/clientes') }}" :active="request()->routeIs('tickets/clientes')">
+                    {{ __('MIS TICKETS') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('tickets/add') }}" :active="request()->routeIs('tickets/add')">
+                    {{ __('AGREGAR TICKET') }}
+                </x-responsive-nav-link>
+            @elseif(Auth()->user()->rol->rol == "EMPLEADO")
+                <x-responsive-nav-link href="{{ route('empleados/tickets') }}" :active="request()->routeIs('empleado/tickets')">
+                    {{ __('MIS TICKETS') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

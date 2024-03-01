@@ -9,8 +9,12 @@
         }
 
         .msg-success, .msg-success-deshabilitado {
-            padding: 1rem 5% 1rem 5%;
-            color: rgb(97, 147, 23);
+            background-color: #d4edda; /* Light green background */
+            color: #155724; /* Dark green text color */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto; /* Center the card horizontally */
+            max-width: 400px; /* Limit card width */
         }
 
         .empleadosTable {
@@ -22,8 +26,7 @@
         }
         .empleadosTableRows {
             display: grid;
-            grid-template-columns: 4fr 2fr 1fr;
-            gap:  0.5rem;
+            grid-template-columns: 1fr 1fr 1fr;
             padding-inline: 5%;
             overflow-y: scroll;
             justify-items: start;
@@ -32,13 +35,19 @@
         
         .header {
             font-weight: bold;
+            border: 1px solid black;
             text-align: left;
+            width: 100%;
+            height: 100%;
         }
         .data {
             display: flex;
             justify-content: start;
             align-items: center;
             word-wrap:break-word;
+            border: 1px solid black;
+            width: 100%;
+            height: 100%;
         }
         .link {
             color: blue;
@@ -152,14 +161,7 @@
             })
         });
 
-        function modal(id, name) {
-            modalTitleElement.innerHTML = "Asigna tickect a: " + name
-            document.querySelector(".empleadoId").value = id
-            if(modalElement.classList.contains("my-hidden")) {
-                modalElement.classList.add("show")
-                modalElement.classList.remove("my-hidden")
-            }
-        }
+        
     </script>
 
     <!-- GAP O ABERTURA PARA QUE LAS TABLAS NO SE VEAN TAN JUNTAS -->

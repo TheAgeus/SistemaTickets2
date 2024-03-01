@@ -76,11 +76,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
         if ($tipo == "EMPLEADO")
         {
-            return DB::table('ticket_user')->where('empleado_id', $clienteId)->count();
+            return DB::table('ticket_empleado')->where('empleado_id', $clienteId)->count();
         }
         if($tipo == "CLIENTE")
         {
-            return DB::table('ticket_user')->where('cliente_id', $clienteId)->count();
+            return Ticket::where('cliente_id', $clienteId)->count();
         }
 
     }

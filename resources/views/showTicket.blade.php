@@ -71,6 +71,10 @@
         .assing_employees_button_open_modal:hover{
             cursor: pointer;
         }
+        .assing_employees {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 
     <div class="card">
@@ -78,28 +82,64 @@
             <h2>{{ $ticketData['titulo'] }}</h2>
         </div>
         <div class="card-body">
-            <p><strong>Description:</strong> {{ $ticketData['descripcion'] }}</p>
-            <p><strong>Priority:</strong> {{ $ticketData['prioridad'] }}</p>
-            <p><strong>Status:</strong> {{ $ticketData['estado'] }}</p>
-            <p><strong>Registered Time:</strong> {{ $ticketData['tiempo_registro'] }}</p>
-            <p><strong>Start Time:</strong> {{ $ticketData['tiempo_inicio'] }}</p>
-            <p><strong>End Time:</strong> {{ $ticketData['tiempo_final'] }}</p>
-            <p><strong>Service Feedback:</strong> {{ $ticketData['como_fue_servicio'] }}</p>
-            <p><strong>Observations:</strong> {{ $ticketData['observaciones'] }}</p>
-            <p><strong>Client:</strong>  
-                <a class="link" href='/empleados/show/{{ $ticketData['cliente_id'] }}'>
-                    {{ $ticketData['cliente_name'] }}
-                </a>
+            <div class="field_two_columns">
+                <p><strong>Descripción:</strong></p> 
+                <p>{{ $ticketData['descripcion'] }}</p>
+            </div>
+
+            <div class="field_one_column">
+                <p><strong>Prioridad:</strong> {{ $ticketData['prioridad'] }}</p>
+            </div>
+
+            <div class="field_one_column">
+                <p><strong>Estatus:</strong> {{ $ticketData['estado'] }}</p>
+            </div>
+
+            <div class="field_two_columns">
+                <p><strong>Tiempo de Registro:</strong> </p> 
+                <p>{{ $ticketData['tiempo_registro'] }}</p>
+            </div>
+
+            <div class="field_two_columns">
+                <p><strong>Tiempo de Inicio:</strong> </p> 
+                <p>{{ $ticketData['tiempo_inicio'] }}</p>
+            </div>
+
+            <div class="field_two_columns">
+                <p><strong>Tiempo al Finalizar:</strong> </p> 
+                <p>{{ $ticketData['tiempo_final'] }}</p>
+            </div>
+
+            <div class="field_one_column">
+                <p><strong>Cómo fue el servicio:</strong> {{ $ticketData['como_fue_servicio'] }}</p>
+            </div>
+
+            <div class="field_two_columns">
+                <p><strong>Observaciones:</strong> </p>
+                <p>{{ $ticketData['observaciones'] }}</p>
+            </div>
+
+            <p><strong>Cliente que pidio el ticket:</strong>  
+                <div class="assing_employees">
+                    <a class="link" href='/empleados/show/{{ $id_cliente }}'>
+                        {{ $nombre_cliente }}
+                    </a>
+                </div>
             </p>
-            <p><strong>Employee:</strong> 
-                <a class="link" href='/empleados/show/{{ $ticketData['empleado_id'] }}'>
-                    {{ $ticketData['empleado_name'] }}
-                </a>
+            <p><strong>Empleados asignados:</strong> 
+                <div class="assing_employees">
+                    @foreach($empleados_asignados as $empleado)
+                        <a class="link" href='/empleados/show/{{ $empleado->id }}'>
+                            {{ $empleado->name }}
+                        </a>
+                    @endforeach
+
+                </div>
             @if(Auth()->user()->rol->rol == "EMPLEADO")  
                 @if($ticketData['estado'] == "PENDIENTE")
-                    <a class="ticket_action_btn" href="{{$ticketData['id']}}/iniciar">Iniciar Ticket</a>
+                    <a class="ticket_action_btn" href="/tickets/{{$ticketData['id']}}/iniciar">Iniciar Ticket</a>
                 @elseif($ticketData['estado'] == "EN PROCESO")
-                    <a class="ticket_action_btn" href="{{$ticketData['id']}}/terminar">Terminar Ticket</a>
+                    <a class="ticket_action_btn" href="/tickets/{{$ticketData['id']}}/terminar">Terminar Ticket</a>
                 @endif
             @elseif(Auth()->user()->rol->rol == "CLIENTE")
                 @if($ticketData['estado'] == "TERMINADO")
@@ -124,11 +164,15 @@
                         <button class="mybutton" type="submit">Calificar Ticket</button>
                     </form>
                 @endif
+            @else
+                @if($ticketData['estado'] != "CALIFICADO")
+                    <div class="assing_employees_button_open_modal">
+                        Asignar empleados
+                    </div>
+                @endif
             @endif
 
-            <div class="assing_employees_button_open_modal">
-                Asignar empleados
-            </div>
+            
             
             <!-- MODAL START -->
 
@@ -217,10 +261,10 @@
         
                         @foreach($empleados as $emp)
                             <div class="input">
-                                <input name="{{"check" . $emp->id}}" class="checkbox-input-asignar" type="checkbox" value="{{$emp->id}}" />
+                                <input name="{{"check" . $emp->empleado_id}}" class="checkbox-input-asignar" type="checkbox" value="{{$emp->empleado_id}}" />
                             </div>
                             <div class="data">
-                                {{$emp->id}} 
+                                {{$emp->empleado_id}} 
                             </div>
                             <div class="data">
                                 {{$emp->name}} 
@@ -229,7 +273,7 @@
                                 {{$emp->rfc}} 
                             </div>
                             <div class="data">
-                                {{$emp->tickets("EMPLEADO", $emp->id)}} 
+                                {{$emp->num_tickets_assigned}} 
                             </div>
                         @endforeach
                     </div>

@@ -1,1 +1,1 @@
-{{$empleados_names}}
+{{dd($test);}}

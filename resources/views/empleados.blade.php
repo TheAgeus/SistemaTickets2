@@ -51,11 +51,19 @@
 
             .ticketsTableRows {
                 display: grid;
-                grid-template-columns: 0.5fr 0.3fr 0.5fr 2fr 5fr;
-                gap:  0.5rem;
+                grid-template-columns: 0.5fr 0.3fr 0.5fr 2fr 5fr 1.5fr;
                 overflow-y: scroll;
                 justify-items: start;
                 align-items: center;
+            }
+            .ticketsTableRows > div {
+                border: 1px solid black;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .title {
                 font-weight: bold;
@@ -90,10 +98,12 @@
                     <div class="header">Prioridad</div>
                     <div class="header">Título</div>
                     <div class="header">Descripcion</div>
+                    <div class="header">Empleados Asignados</div>
     
                     @foreach($tickets as $ticket)
+                        
                         <div class="input">
-                            <input name="{{"check" . $ticket->id}}" class="checkbox-input-asignar" type="checkbox" value="{{$ticket->id}}" />
+                            <input id="{{"check" . $ticket->id}}" name="{{"check" . $ticket->id}}" class="checkbox-input-asignar" type="checkbox" value="{{$ticket->id}}" />
                         </div>
                         <div class="data">
                             {{$ticket->id}} 
@@ -107,6 +117,11 @@
                         <div class="data">
                             {{$ticket->descripcion}} 
                         </div>
+                        <div class="data">
+                            <div class="empleados_asignados" id="emp_asig{{$ticket->id}}">
+                                {{$ticket->empleados_asignados}} 
+                            </div>
+                        </div>
                     @endforeach
                 </div>
                 
@@ -118,8 +133,41 @@
             const modalElement = document.querySelector(".modal")
             const modalTitleElement = modalElement.querySelector(".title")
             const closeBtn = modalElement.querySelector(".close-button") 
-            
+            const allCheckBoxes = document.querySelectorAll('.checkbox-input-asignar')
+
+            function modal(id, name) {
+
+                all_empleados_asignados = document.querySelectorAll('.empleados_asignados');
+                all_empleados_asignados.forEach(empleados_asignados => {
+                    id_empleado = id;
+                    console.log(id_empleado)
+                    ids_empleados = empleados_asignados.innerHTML.trim();
+                    ids_empleados = ids_empleados.split(',');
+                    console.log(ids_empleados);
+                    if (ids_empleados.includes(id_empleado.toString())) {
+                        check_id = "check" + empleados_asignados.id.replace('emp_asig', '');
+                        document.getElementById(`${check_id}`).disabled = true;
+                    }
+                    else {
+                        check_id = "check" + empleados_asignados.id.replace('emp_asig', '');
+                        document.getElementById(`${check_id}`).disabled = false;
+                    }
+                });
+
+                modalTitleElement.innerHTML = "Asigna tickect a: " + name
+                document.querySelector(".empleadoId").value = id
+                if(modalElement.classList.contains("my-hidden")) {
+                    modalElement.classList.add("show")
+                    modalElement.classList.remove("my-hidden")
+                }
+            }
+
             closeBtn.addEventListener("click", (e) => {
+
+                allCheckBoxes.forEach(element => {
+                    element.checked = false;
+                });
+
                 if(modalElement.classList.contains("show")) {
                     modalElement.classList.add("my-hidden")
                     modalElement.classList.remove("show")

@@ -4,11 +4,15 @@
 .login-card {
     background-color: white;
     transition: 0.2s ease-out 20ms;
-
+    color: black;
+}
+.login-card > form > div > label {
+    color: black;
 }
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    color: black;
 }
 .toggle-color-mode-btn {
     position: absolute;
@@ -30,7 +34,7 @@
 /* Dark mode */
 
 .dark {
-    background-color: rgb(39, 45, 40);
+    background-color: rgb(27, 28, 27);
 }
 .dark > .login-card {
     background-color: rgb(39, 45, 40);

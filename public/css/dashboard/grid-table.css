@@ -1,6 +1,7 @@
 @media (width > 400px) {
     .grid-table{
         padding: 5%;
+        
     }
 }
 .header-cell {
@@ -8,15 +9,21 @@
 }
 .grid-table {
     display: grid;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    padding: 3px;
 }
 .clientes-table {
-    gap: 1rem;
     grid-template-columns: 2fr 2fr 1fr;
+    padding: 1rem;
+
 }
 
+.tickets-table > div, .clientes-table > div {
+    border: 1px solid black;
+    text-align: center;
+}
 .tickets-table {
-    gap: 1rem;
+    padding: 1rem;
     grid-template-columns: 0.2fr 2fr 5fr 0.5fr 1fr;
 }
 .my-tickets-table { /* Para la tabla de tickets de un cliente */

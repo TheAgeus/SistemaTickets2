@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,11 @@ Route::middleware([
     Route::get('/clientes/show/{id}', [App\Http\Controllers\UserController::class, 'showCliente'])->name('show_cliente');
     Route::get('/empleados/show/{id}', [App\Http\Controllers\UserController::class, 'showCliente'])->name('show_cliente');
 
+    Route::get('/descargar_excel', [App\Http\Controllers\TicketController::class, 'show_descargar_excel'])->name('show_descargar_excel');
+
+    Route::get('/agregar_empleado_vista', [App\Http\Controllers\UserController::class, 'agregar_empleado_vista'])->name('agregar_empleado_vista');
+    Route::post('/agregar_empleado', [App\Http\Controllers\UserController::class, 'agregar_empleado'])->name('agregar_empleado');
+
     Route::get('/tickets/clientes', [App\Http\Controllers\TicketController::class, 'ticketsClientes'])->name('tickets/clientes');
     Route::get('/tickets/add', [App\Http\Controllers\TicketController::class, 'ticketsClientesAddTicket'])->name('tickets/add');
     Route::post('/tickets/add', [App\Http\Controllers\TicketController::class, 'ticketsClientesAddTicketPost'])->name('tickets/add/post');
@@ -53,4 +59,9 @@ Route::middleware([
     Route::post('/ticket/asignar/empleados', [App\Http\Controllers\TicketController::class, 'ticketAsignarEmpleados'])->name('ticket/asignar/empleados');
     
     Route::post('/tickets/calificar', [App\Http\Controllers\TicketController::class, 'calificarTicket'])->name('calificarTicket');
+
+    Route::get('/testxd',[App\Http\Controllers\TicketController::class, 'testxd'])->name('testxd');
+
+    /* Export */
+    Route::post('/export', [ExportController::class, 'export'])->name('export');
 });
